@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+*.egg-info/
+
+# Node
+node_modules/
+dist/
+build/
+
+# Docker volumes & db
+pgdata/
+infra/db/backups/
+
+# Env files
+.env
+*.env.local
+
+# IDE/editor configs
+.vscode/
+.idea/
+*.swp
