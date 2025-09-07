@@ -1,27 +1,25 @@
 # Python
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
 .venv/
-env/
 venv/
-*.egg-info/
+ENV/
 
-# Node
+# Node / React
 node_modules/
 dist/
 build/
 
-# Docker volumes & db
-pgdata/
-infra/db/backups/
+# Docker
+*.pid
+*.log
 
-# Env files
+# Secrets
 .env
-*.env.local
+.env.*
+*.key
+*.pem
 
-# IDE/editor configs
-.vscode/
-.idea/
-*.swp
+# OS
+.DS_Store
+Thumbs.db
