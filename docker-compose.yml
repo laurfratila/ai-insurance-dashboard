@@ -30,6 +30,7 @@ services:
     command: uvicorn app.main:app --host 0.0.0.0 --port ${BACKEND_PORT} --reload
     volumes:
       - ./backend:/app
+      - ./data:/data:ro
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
     # comment this block if you want to ignore db for now

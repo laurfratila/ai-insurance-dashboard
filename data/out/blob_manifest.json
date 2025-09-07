@@ -1,0 +1,2002 @@
+[
+  {
+    "claim_id": "CL-0000001",
+    "blob_path": "claims/CL-0000001/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000002",
+    "blob_path": "claims/CL-0000002/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000003",
+    "blob_path": "claims/CL-0000003/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000004",
+    "blob_path": "claims/CL-0000004/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000005",
+    "blob_path": "claims/CL-0000005/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000006",
+    "blob_path": "claims/CL-0000006/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000007",
+    "blob_path": "claims/CL-0000007/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000008",
+    "blob_path": "claims/CL-0000008/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000009",
+    "blob_path": "claims/CL-0000009/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000010",
+    "blob_path": "claims/CL-0000010/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000011",
+    "blob_path": "claims/CL-0000011/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000012",
+    "blob_path": "claims/CL-0000012/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000013",
+    "blob_path": "claims/CL-0000013/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000014",
+    "blob_path": "claims/CL-0000014/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000015",
+    "blob_path": "claims/CL-0000015/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000016",
+    "blob_path": "claims/CL-0000016/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000017",
+    "blob_path": "claims/CL-0000017/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000018",
+    "blob_path": "claims/CL-0000018/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000019",
+    "blob_path": "claims/CL-0000019/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000020",
+    "blob_path": "claims/CL-0000020/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000021",
+    "blob_path": "claims/CL-0000021/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000022",
+    "blob_path": "claims/CL-0000022/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000023",
+    "blob_path": "claims/CL-0000023/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000024",
+    "blob_path": "claims/CL-0000024/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000025",
+    "blob_path": "claims/CL-0000025/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000026",
+    "blob_path": "claims/CL-0000026/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000027",
+    "blob_path": "claims/CL-0000027/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000028",
+    "blob_path": "claims/CL-0000028/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000029",
+    "blob_path": "claims/CL-0000029/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000030",
+    "blob_path": "claims/CL-0000030/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000031",
+    "blob_path": "claims/CL-0000031/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000032",
+    "blob_path": "claims/CL-0000032/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000033",
+    "blob_path": "claims/CL-0000033/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000034",
+    "blob_path": "claims/CL-0000034/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000035",
+    "blob_path": "claims/CL-0000035/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000036",
+    "blob_path": "claims/CL-0000036/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000037",
+    "blob_path": "claims/CL-0000037/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000038",
+    "blob_path": "claims/CL-0000038/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000039",
+    "blob_path": "claims/CL-0000039/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000040",
+    "blob_path": "claims/CL-0000040/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000041",
+    "blob_path": "claims/CL-0000041/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000042",
+    "blob_path": "claims/CL-0000042/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000043",
+    "blob_path": "claims/CL-0000043/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000044",
+    "blob_path": "claims/CL-0000044/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000045",
+    "blob_path": "claims/CL-0000045/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000046",
+    "blob_path": "claims/CL-0000046/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000047",
+    "blob_path": "claims/CL-0000047/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000048",
+    "blob_path": "claims/CL-0000048/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000049",
+    "blob_path": "claims/CL-0000049/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000050",
+    "blob_path": "claims/CL-0000050/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000051",
+    "blob_path": "claims/CL-0000051/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000052",
+    "blob_path": "claims/CL-0000052/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000053",
+    "blob_path": "claims/CL-0000053/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000054",
+    "blob_path": "claims/CL-0000054/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000055",
+    "blob_path": "claims/CL-0000055/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000056",
+    "blob_path": "claims/CL-0000056/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000057",
+    "blob_path": "claims/CL-0000057/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000058",
+    "blob_path": "claims/CL-0000058/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000059",
+    "blob_path": "claims/CL-0000059/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000060",
+    "blob_path": "claims/CL-0000060/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000061",
+    "blob_path": "claims/CL-0000061/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000062",
+    "blob_path": "claims/CL-0000062/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000063",
+    "blob_path": "claims/CL-0000063/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000064",
+    "blob_path": "claims/CL-0000064/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000065",
+    "blob_path": "claims/CL-0000065/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000066",
+    "blob_path": "claims/CL-0000066/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000067",
+    "blob_path": "claims/CL-0000067/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000068",
+    "blob_path": "claims/CL-0000068/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000069",
+    "blob_path": "claims/CL-0000069/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000070",
+    "blob_path": "claims/CL-0000070/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000071",
+    "blob_path": "claims/CL-0000071/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000072",
+    "blob_path": "claims/CL-0000072/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000073",
+    "blob_path": "claims/CL-0000073/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000074",
+    "blob_path": "claims/CL-0000074/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000075",
+    "blob_path": "claims/CL-0000075/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000076",
+    "blob_path": "claims/CL-0000076/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000077",
+    "blob_path": "claims/CL-0000077/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000078",
+    "blob_path": "claims/CL-0000078/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000079",
+    "blob_path": "claims/CL-0000079/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000080",
+    "blob_path": "claims/CL-0000080/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000081",
+    "blob_path": "claims/CL-0000081/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000082",
+    "blob_path": "claims/CL-0000082/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000083",
+    "blob_path": "claims/CL-0000083/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000084",
+    "blob_path": "claims/CL-0000084/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000085",
+    "blob_path": "claims/CL-0000085/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000086",
+    "blob_path": "claims/CL-0000086/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000087",
+    "blob_path": "claims/CL-0000087/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000088",
+    "blob_path": "claims/CL-0000088/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000089",
+    "blob_path": "claims/CL-0000089/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000090",
+    "blob_path": "claims/CL-0000090/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000091",
+    "blob_path": "claims/CL-0000091/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000092",
+    "blob_path": "claims/CL-0000092/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000093",
+    "blob_path": "claims/CL-0000093/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000094",
+    "blob_path": "claims/CL-0000094/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000095",
+    "blob_path": "claims/CL-0000095/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000096",
+    "blob_path": "claims/CL-0000096/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000097",
+    "blob_path": "claims/CL-0000097/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000098",
+    "blob_path": "claims/CL-0000098/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000099",
+    "blob_path": "claims/CL-0000099/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000100",
+    "blob_path": "claims/CL-0000100/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000101",
+    "blob_path": "claims/CL-0000101/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000102",
+    "blob_path": "claims/CL-0000102/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000103",
+    "blob_path": "claims/CL-0000103/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000104",
+    "blob_path": "claims/CL-0000104/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000105",
+    "blob_path": "claims/CL-0000105/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000106",
+    "blob_path": "claims/CL-0000106/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000107",
+    "blob_path": "claims/CL-0000107/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000108",
+    "blob_path": "claims/CL-0000108/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000109",
+    "blob_path": "claims/CL-0000109/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000110",
+    "blob_path": "claims/CL-0000110/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000111",
+    "blob_path": "claims/CL-0000111/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000112",
+    "blob_path": "claims/CL-0000112/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000113",
+    "blob_path": "claims/CL-0000113/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000114",
+    "blob_path": "claims/CL-0000114/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000115",
+    "blob_path": "claims/CL-0000115/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000116",
+    "blob_path": "claims/CL-0000116/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000117",
+    "blob_path": "claims/CL-0000117/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000118",
+    "blob_path": "claims/CL-0000118/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000119",
+    "blob_path": "claims/CL-0000119/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000120",
+    "blob_path": "claims/CL-0000120/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000121",
+    "blob_path": "claims/CL-0000121/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000122",
+    "blob_path": "claims/CL-0000122/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000123",
+    "blob_path": "claims/CL-0000123/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000124",
+    "blob_path": "claims/CL-0000124/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000125",
+    "blob_path": "claims/CL-0000125/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000126",
+    "blob_path": "claims/CL-0000126/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000127",
+    "blob_path": "claims/CL-0000127/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000128",
+    "blob_path": "claims/CL-0000128/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000129",
+    "blob_path": "claims/CL-0000129/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000130",
+    "blob_path": "claims/CL-0000130/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000131",
+    "blob_path": "claims/CL-0000131/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000132",
+    "blob_path": "claims/CL-0000132/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000133",
+    "blob_path": "claims/CL-0000133/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000134",
+    "blob_path": "claims/CL-0000134/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000135",
+    "blob_path": "claims/CL-0000135/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000136",
+    "blob_path": "claims/CL-0000136/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000137",
+    "blob_path": "claims/CL-0000137/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000138",
+    "blob_path": "claims/CL-0000138/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000139",
+    "blob_path": "claims/CL-0000139/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000140",
+    "blob_path": "claims/CL-0000140/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000141",
+    "blob_path": "claims/CL-0000141/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000142",
+    "blob_path": "claims/CL-0000142/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000143",
+    "blob_path": "claims/CL-0000143/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000144",
+    "blob_path": "claims/CL-0000144/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000145",
+    "blob_path": "claims/CL-0000145/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000146",
+    "blob_path": "claims/CL-0000146/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000147",
+    "blob_path": "claims/CL-0000147/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000148",
+    "blob_path": "claims/CL-0000148/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000149",
+    "blob_path": "claims/CL-0000149/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000150",
+    "blob_path": "claims/CL-0000150/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000151",
+    "blob_path": "claims/CL-0000151/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000152",
+    "blob_path": "claims/CL-0000152/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000153",
+    "blob_path": "claims/CL-0000153/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000154",
+    "blob_path": "claims/CL-0000154/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000155",
+    "blob_path": "claims/CL-0000155/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000156",
+    "blob_path": "claims/CL-0000156/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000157",
+    "blob_path": "claims/CL-0000157/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000158",
+    "blob_path": "claims/CL-0000158/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000159",
+    "blob_path": "claims/CL-0000159/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000160",
+    "blob_path": "claims/CL-0000160/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000161",
+    "blob_path": "claims/CL-0000161/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000162",
+    "blob_path": "claims/CL-0000162/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000163",
+    "blob_path": "claims/CL-0000163/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000164",
+    "blob_path": "claims/CL-0000164/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000165",
+    "blob_path": "claims/CL-0000165/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000166",
+    "blob_path": "claims/CL-0000166/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000167",
+    "blob_path": "claims/CL-0000167/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000168",
+    "blob_path": "claims/CL-0000168/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000169",
+    "blob_path": "claims/CL-0000169/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000170",
+    "blob_path": "claims/CL-0000170/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000171",
+    "blob_path": "claims/CL-0000171/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000172",
+    "blob_path": "claims/CL-0000172/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000173",
+    "blob_path": "claims/CL-0000173/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000174",
+    "blob_path": "claims/CL-0000174/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000175",
+    "blob_path": "claims/CL-0000175/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000176",
+    "blob_path": "claims/CL-0000176/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000177",
+    "blob_path": "claims/CL-0000177/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000178",
+    "blob_path": "claims/CL-0000178/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000179",
+    "blob_path": "claims/CL-0000179/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000180",
+    "blob_path": "claims/CL-0000180/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000181",
+    "blob_path": "claims/CL-0000181/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000182",
+    "blob_path": "claims/CL-0000182/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000183",
+    "blob_path": "claims/CL-0000183/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000184",
+    "blob_path": "claims/CL-0000184/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000185",
+    "blob_path": "claims/CL-0000185/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000186",
+    "blob_path": "claims/CL-0000186/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000187",
+    "blob_path": "claims/CL-0000187/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000188",
+    "blob_path": "claims/CL-0000188/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000189",
+    "blob_path": "claims/CL-0000189/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000190",
+    "blob_path": "claims/CL-0000190/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000191",
+    "blob_path": "claims/CL-0000191/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000192",
+    "blob_path": "claims/CL-0000192/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000193",
+    "blob_path": "claims/CL-0000193/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000194",
+    "blob_path": "claims/CL-0000194/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000195",
+    "blob_path": "claims/CL-0000195/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000196",
+    "blob_path": "claims/CL-0000196/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000197",
+    "blob_path": "claims/CL-0000197/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000198",
+    "blob_path": "claims/CL-0000198/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000199",
+    "blob_path": "claims/CL-0000199/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  },
+  {
+    "claim_id": "CL-0000200",
+    "blob_path": "claims/CL-0000200/",
+    "expected_files": [
+      "report.pdf",
+      "photo_1.jpg",
+      "photo_2.jpg"
+    ],
+    "ocr_text": ""
+  }
+]
