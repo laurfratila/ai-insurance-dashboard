@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+ENV/
+
+# Node / React
+node_modules/
+dist/
+build/
+
+# Docker
+*.pid
+*.log
+
+# Secrets
+.env
+.env.*
+*.key
+*.pem
+
+# OS
+.DS_Store
+Thumbs.db
