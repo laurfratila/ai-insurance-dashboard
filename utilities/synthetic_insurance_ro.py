@@ -121,6 +121,7 @@ SEVERITY_LN = {
     "hail": (8.3, 0.7),
     "theft": (7.3, 0.9),
     "collision": (7.8, 0.8),
+    "comprehensive": (7.9, 0.8),
     "fire": (9.0, 1.0),
     "water_damage": (8.0, 0.7)
 }
@@ -286,7 +287,7 @@ def policy_freq_multiplier(product:str, risks:dict, crime:float, telem:dict|None
     if product == "homeowners":
         return 1 + 0.8*risks['hail'] + 0.6*risks['flood'] + 0.3*crime
     if product == "renters":
-        return 1 + 0.5*crime + 0.3*risks['water']
+        return 1 + 0.5*crime + 0.3*risks['flood']
     if product == "auto":
         telem_risk = (100 - telem['telematics_score'])/100 if telem else 0.3
         return 1 + 0.9*telem_risk + 0.3*crime + 0.2*risks['wind']
@@ -386,7 +387,7 @@ def generate_policies(customers:pd.DataFrame, sizes:Sizes):
             roommates = int(rng.integers(0,3))
             premium = renters_premium(limit_pp, {"water":cust.flood_risk}, crime, discounts)
             rows_rent.append({"unit_id":f"R-{i+1:06d}","policy_id":pid,"personal_property_limit":limit_pp,
-                              "roommates_count":roommates,"building_type":rng.choice(["block","house"],[0.8,0.2])})
+                              "roommates_count":roommates,"building_type":rng.choice(["block","house"], p=[0.8,0.2])})
             for ctype in COVERAGE_TYPES['renters']:
                 limit = {"personal_property":limit_pp, "liability":50000, "loss_of_use":5000}[ctype]
                 deductible = rng.choice([100,250,500], p=[0.3,0.5,0.2])
@@ -478,7 +479,10 @@ def generate_claims(policies:pd.DataFrame, customers:pd.DataFrame, vehicles:pd.D
         if n_claims==0:
             continue
         for _ in range(n_claims):
-            peril = rng.choice(PERILS_BY_PRODUCT[product], p=[base[x] for x in PERILS_BY_PRODUCT[product]])
+            perils = PERILS_BY_PRODUCT[product]
+            probs = np.array([base[x] for x in perils], dtype=float)
+            probs = probs / probs.sum()
+            peril = rng.choice(perils, p=probs)
             # month weighting
             month = int(rng.integers(1,13))
             if peril in SEASONALITY:
