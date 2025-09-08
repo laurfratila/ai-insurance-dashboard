@@ -8,6 +8,7 @@ Tech stack: **FastAPI** (backend), **React + Vite** (frontend), **Postgres** (da
 ##  Project Overview
 This project delivers **AI-powered dashboards** for insurance operations, enabling real-time monitoring and automation.  
 
+- **Mission Goal:** Provide insurers with dashboards for claims, policies, loss ratios, and operational KPIs.  
 - **Data Source:** Synthetic Romanian insurance dataset generated with `synthetic_insurance_ro.py`.  
 - **Database Design:**  
   - `raw` → direct CSV imports  
@@ -56,7 +57,22 @@ git clone <your-repo-url>
 cd ai-insurance-dashboard
 ```
 
-### 2. Create your `.env`
+### 2. Create a virtual environment (optional but recommended)
+```bash
+# macOS/Linux
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Windows PowerShell
+python -m venv .venv
+.venv\\Scripts\\activate
+```
+Install Python dependencies if needed:
+```bash
+pip install -r backend/requirements.txt
+```
+
+### 3. Create your `.env`
 Copy the template and fill in secrets:
 ```bash
 cp .env.example .env
@@ -78,7 +94,7 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
 
  **Never commit `.env`** — only commit `.env.example`.
 
-### 3. Start the stack with Docker
+### 4. Start the stack with Docker
 ```bash
 docker compose up --build
 ```
@@ -116,6 +132,10 @@ docker compose exec db psql -U appuser -d insurancedb -c "CREATE SCHEMA IF NOT E
 ### Step 3 — Load CSVs into `raw`
 ```bash
 docker compose exec backend python scripts/load_to_db.py --path /data/out --schema raw --replace
+```
+Check:
+```bash
+docker compose exec db psql -U appuser -d insurancedb -c "\dt raw.*"
 ```
 
 ### Step 4 — Build `core` tables
@@ -190,6 +210,4 @@ docker compose exec backend python scripts/rebuild_analytics.py
 ```
 
 ---
-
- 
 
