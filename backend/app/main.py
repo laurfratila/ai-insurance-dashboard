@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import marts 
+from .routers import marts
+from .routers import overview
 
 app = FastAPI(title="Insurance Backend", version="0.1.0")
 
@@ -18,3 +19,4 @@ def health():
 
 # mount the marts router
 app.include_router(marts.router)
+app.include_router(overview.router)
