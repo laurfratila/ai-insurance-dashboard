@@ -13,6 +13,9 @@ SQL = """
 REFRESH MATERIALIZED VIEW marts.claims_by_month;
 REFRESH MATERIALIZED VIEW marts.loss_ratio_by_month;
 REFRESH MATERIALIZED VIEW marts.claims_by_county;
+REFRESH MATERIALIZED VIEW marts.gwp_by_month;
+REFRESH MATERIALIZED VIEW marts.claims_frequency_by_month;
+REFRESH MATERIALIZED VIEW marts.avg_settlement_time_by_month;
 """
 
 def main():
