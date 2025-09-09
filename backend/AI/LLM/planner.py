@@ -70,6 +70,8 @@ Return ONLY a JSON object with keys:
 - If the question refers to a customer by name and a city, join policies->customers or claims->policies->customers accordingly.
 - If the user asks for recent time windows like "last 30 days", convert to BETWEEN [today-30, today], but leave exact dates blank for the API to fill if not known.
 - If the user asks broadly and no fields are specified, return a sensible narrow selection and set limit to 50.
+- **If the question asks for a total (e.g., "how many customers", "total policies", "count of claims"), do NOT use GROUP BY unless the user explicitly asks for a breakdown. Just return a single COUNT or aggregate row.**
+
 
 ### IMPORTANT
 Return ONLY the JSON. No prose, no markdown, no extra keys.

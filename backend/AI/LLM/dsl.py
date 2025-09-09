@@ -96,6 +96,17 @@ class Plan(BaseModel):
         filters: List[Filter] = self.filters or []
         aggregations: List[str] = self.aggregations or []
 
+        # Collect aggregation aliases like "... as premium"
+        def agg_aliases(aggs: list[str]) -> set[str]:
+            aliases = set()
+            for a in aggs:
+                low = a.lower()
+                if " as " in low:
+                    aliases.add(low.split(" as ", 1)[1].strip())
+            return aliases
+
+        aliases = agg_aliases(aggregations)
+
         # Determine reachable views
         reachable: Set[str] = {base}
         for j in joins:
@@ -128,7 +139,14 @@ class Plan(BaseModel):
         # Qualify select / group_by / order_by / filters
         q_select = [qualify(c) for c in select]
         q_group = [qualify(c) for c in group_by]
-        q_order = [(qualify(o.col), o.dir) for o in order_by]
+        q_order = []
+        for o in order_by:
+            col = o.col.strip()
+            # Allow ORDER BY on aggregation alias (leave as-is, unqualified)
+            if "." not in col and col.lower() in aliases:
+                q_order.append((col, o.dir))
+            else:
+                q_order.append((qualify(col), o.dir))
 
         # Validate filters columns & normalize BETWEEN/IN values superficially
         for f in filters:
@@ -164,12 +182,24 @@ class Plan(BaseModel):
 
         # PII detection
         pii_used = False
-        # Build a list of qualified columns appearing in select/group/order and filters
-        qualified_filter_cols = []
+
+        # Build a list of qualified columns appearing in filters
+        qualified_filter_cols: list[str] = []
         for f in filters:
             qualified_filter_cols.append(f.col if "." in f.col else qualify(f.col))
-        for q in q_select + q_group + [c for c, _ in q_order] + qualified_filter_cols:
-            v, c = q.split(".", 1)
+
+        # Consider: select, group_by, order_by (may contain aliases), and filters
+        scan_cols: list[str] = []
+        scan_cols += q_select
+        scan_cols += q_group
+        scan_cols += [c for c, _ in q_order]         # may include aliases (no dot)
+        scan_cols += qualified_filter_cols
+
+        for qcol in scan_cols:
+            if "." not in qcol:
+                # Unqualified name (likely an aggregation alias like "premium") — skip
+                continue
+            v, c = qcol.split(".", 1)
             if c in pii_for(v):
                 pii_used = True
                 break

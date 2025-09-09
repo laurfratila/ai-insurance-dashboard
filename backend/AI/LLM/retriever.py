@@ -6,13 +6,12 @@ NL question → Plan → SQL → DB → response (rows + citations + meta).
 """
 
 from __future__ import annotations
-
 import time
 import hashlib
+from .logging import rag_logger
 from typing import Any, Dict
-
+from .summarizer import summarize_rows
 from sqlalchemy.engine import Connection # type: ignore
-
 from .dsl import Plan
 from .compiler import compile_sql
 from .executor import run_query, make_citations
@@ -66,6 +65,8 @@ def answer_question(
     # 4) Execute
     t_exec0 = time.time()
     rows = run_query(db, sql, params, allow_pii=allow_pii)
+    summary_result = summarize_rows(question, rows)
+
     exec_ms = round((time.time() - t_exec0) * 1000)
 
     # 5) Build citations (≥2)
@@ -83,10 +84,26 @@ def answer_question(
         "contains_pii": plan.contains_pii,
         "user_id": user_id,
         "total_latency_ms": total_ms,
+        "model": llm_meta.get("model")
+
+    }
+    rag_logger.info(
+    f"RAG Query | user_id={user_id} | question={(question[:80] + '...' if len(question) > 80 else question)} | "
+    f"model={meta.get('model')} | llm_latency={meta.get('llm_latency_ms')}ms | "
+    f"summary_latency={meta.get('summary_llm_latency_ms')}ms | "
+    f"tokens={meta.get('token_usage', {}).get('total')} | "
+    f"citations={[c['title'] for c in citations]}"
+)
+    return {
+        "answer": {
+            "rows": rows,
+            "count": len(rows),
+            "summary": summary_result.get("summary")
+        },
+        "citations": citations,
+        "meta": meta | {
+            "summary_llm_latency_ms": summary_result.get("llm_latency_ms"),
+            "summary_token_usage": summary_result.get("token_usage"),
+        }
     }
 
-    return {
-        "answer": {"rows": rows, "count": len(rows)},
-        "citations": citations,
-        "meta": meta,
-    }
