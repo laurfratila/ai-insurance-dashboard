@@ -40,12 +40,14 @@ def summarize_rows(question: str, rows: List[Dict[str, Any]], max_rows: int = 5)
     # Keep the first few rows as JSON context
     snippet = rows[:max_rows]
 
-    system_prompt = """You are an analytics assistant.
+    system_prompt = """You are an analytics assistant with expertise in insurance industry.
 Given a user question and some tabular results, write a short factual summary.
 - Be concise (2–3 sentences).
 - Use only the data provided.
 - Do not hallucinate.
 - If rows contain numeric aggregates, highlight the key values.
+- Do not say "approximately" unless the data includes a range or estimate.
+- Offer a short interpretation of the numbers with respect to our data.
 """
 
     user_prompt = f"Question: {question}\nRows: {snippet}"

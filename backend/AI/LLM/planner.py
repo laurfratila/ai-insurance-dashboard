@@ -60,17 +60,25 @@ Return ONLY a JSON object with keys:
 - aggregations: array of aggregation expressions, allowed: COUNT(*), SUM(col), AVG(col), MIN(col), MAX(col). Aliases allowed via " as alias".
 - order_by: array of { "col": <column>, "dir": "asc"|"desc" }
 - limit: integer (<= max)
+- Look at the EXAMPLE PLANS section to find similar patterns before creating the plan.
 
 ### Rules
 - Use ONLY the views/columns/joins/operators provided in the SCHEMA below.
 - Prefer filters over selecting PII. Include PII columns (email, phone, dob) only if explicitly asked.
 - Qualify columns when needed to avoid ambiguity (e.g., status exists in multiple tables).
 - Dates are strings "YYYY-MM-DD". Use BETWEEN for closed ranges.
-- If the question implies grouping/aggregation (e.g., “how many”, “total”, “average”), always include a group_by clause that contains all non-aggregated fields in the select array.
+- If the plan contains aggregation functions (SUM, COUNT, AVG, etc.), and you are selecting other columns, you MUST include all non-aggregated columns in the group_by array.
+- The group_by must match exactly all non-aggregated columns from the select list.
+- Do NOT include a raw column like policies.gross_premium in the select array if you're already using it in an aggregation (e.g., avg(policies.gross_premium)).
 - If the question refers to a customer by name and a city, join policies->customers or claims->policies->customers accordingly.
+- If the user asks for a percentage of customers matching a filter (e.g., age group, city), calculate both the filtered count and the total count using COUNT() and use them to compute the percentage.
+- Use a COUNT(*) FILTER (WHERE ...) as aged_group, and a second COUNT(*) as total_customers.
 - If the user asks for recent time windows like "last 30 days", convert to BETWEEN [today-30, today], but leave exact dates blank for the API to fill if not known.
 - If the user asks broadly and no fields are specified, return a sensible narrow selection and set limit to 50.
 - **If the question asks for a total (e.g., "how many customers", "total policies", "count of claims"), do NOT use GROUP BY unless the user explicitly asks for a breakdown. Just return a single COUNT or aggregate row.**
+- If the question asks “how much” or “total” about financial values (like amounts paid, reserved, premiums), use SUM() aggregations on the appropriate fields (e.g., claims.paid, claims.reserve, policies.gross_premium).
+- NEVER use SELECT * in such cases. Only return necessary columns or aggregations.
+- If the question asks for a comparison between two metrics (e.g., paid vs reserved), include both in the aggregation list.
 
 
 ### IMPORTANT
@@ -80,20 +88,61 @@ Return ONLY the JSON. No prose, no markdown, no extra keys.
 
 # A tiny, realistic example shown to the model to anchor format.
 # Keep this minimal to avoid excessive token usage.
-EXAMPLE_PLAN = {
-    "view": "policies",
-    "select": ["policies.product_type", "policies.channel", "policies.status"],
-    "filters": [
-        {"col": "customers.city", "op": "ILIKE", "val": "Cluj%"},
-        {"col": "policies.status", "op": "=", "val": "active"}
+EXAMPLE_PLAN = [
+    {
+        "view": "policies",
+        "select": ["policies.product_type", "policies.channel", "policies.status"],
+        "filters": [
+            {"col": "customers.city", "op": "ILIKE", "val": "Cluj%"},
+            {"col": "policies.status", "op": "=", "val": "active"}
+        ],
+        "joins": ["policies->customers"],
+        "group_by": ["policies.product_type", "policies.channel", "policies.status"],
+        "aggregations": ["count(*) as policies", "sum(policies.gross_premium) as premium"],
+        "order_by": [{"col": "premium", "dir": "desc"}],
+        "limit": 50
+    },
+    {
+        "view": "claims",
+        "select": [],
+        "filters": [
+            {"col": "claims.loss_date", "op": "BETWEEN", "val": ["2024-01-01", "2024-12-31"]}
+        ],
+        "joins": [],
+        "group_by": [],
+        "aggregations": [
+            "sum(claims.paid) as total_paid",
+            "sum(claims.reserve) as total_reserved"
+        ],
+        "order_by": [],
+        "limit": 1
+    },
+    {
+        "view": "policies",
+        "select": [],
+        "filters": [
+            {"col": "policies.product_type", "op": "=", "val": "auto"}
+        ],
+        "joins": [],
+        "group_by": [],
+        "aggregations": ["avg(policies.gross_premium) as avg_premium"],
+        "order_by": [],
+        "limit": 1
+    },
+    {
+    "view": "customers",
+    "select": [],
+    "filters": [],
+    "joins": [],
+    "group_by": [],
+    "aggregations": [
+        "count(*) FILTER (WHERE customers.dob BETWEEN '1993-01-01' AND '2003-12-31') as aged_20_30",
+        "count(*) as total_customers"
     ],
-    "joins": ["policies->customers"],
-    "group_by": ["policies.product_type", "policies.channel", "policies.status"],
-    "aggregations": ["count(*) as policies", "sum(policies.gross_premium) as premium"],
-    "order_by": [{"col": "premium", "dir": "desc"}],
-    "limit": 50
-}
-
+    "order_by": [],
+    "limit": 1
+    }
+]
 
 # -------------------------
 # Public API
@@ -115,7 +164,7 @@ def build_plan_from_nl(question: str) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": "SCHEMA:\n" + schema_txt},
-        {"role": "user", "content": "EXAMPLE PLAN (for reference):\n" + json.dumps(EXAMPLE_PLAN, ensure_ascii=False)},
+        {"role": "user", "content": "EXAMPLE PLANS (for reference):\n" + "\n\n".join(json.dumps(p, ensure_ascii=False) for p in EXAMPLE_PLAN)},
         {"role": "user", "content": f"QUESTION:\n{question}\n\nReturn ONLY the JSON Plan."},
     ]
 
