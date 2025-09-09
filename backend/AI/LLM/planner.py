@@ -17,7 +17,7 @@ import os
 import time
 from typing import Dict, Tuple, Any, List
 
-from openai import OpenAI
+from openai import OpenAI # type: ignore
 
 from .schema import ALLOWED_VIEWS, JOIN_RULES, ALLOWED_OPERATORS, DEFAULT_LIMIT, MAX_LIMIT
 

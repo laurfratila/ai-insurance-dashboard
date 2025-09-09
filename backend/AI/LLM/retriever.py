@@ -9,6 +9,7 @@ from __future__ import annotations
 import time
 import hashlib
 from .logging import rag_logger
+from .intent import detect_intent
 from typing import Any, Dict
 from .summarizer import summarize_rows
 from sqlalchemy.engine import Connection # type: ignore
@@ -52,6 +53,32 @@ def answer_question(
       }
     """
     t0 = time.time()
+
+    # 🔎 Detect intent
+    intent = detect_intent(question)
+
+    if intent == "smalltalk":
+        summary_text = (
+            "I'm doing great, thanks for asking! 😊\n"
+            "Would you like to explore some quick insights on your KPIs, like open claims, average premium, "
+            "or ask me something else?"
+        )
+        rag_logger.info(
+            f"RAG 🤝 Smalltalk | user_id={user_id} | question={(question[:80] + '...' if len(question) > 80 else question)}"
+        )
+        return {
+            "answer": {
+                "rows": [],
+                "count": 0,
+                "summary": summary_text
+            },
+            "citations": [],
+            "meta": {
+                "intent": "smalltalk",
+                "user_id": user_id,
+                "question_hash": _hash_for_logging(question),
+            }
+        }
 
     # 1) NL → Plan (dict) via the LLM planner
     plan_dict, llm_meta = build_plan_from_nl(question)
