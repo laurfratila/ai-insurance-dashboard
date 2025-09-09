@@ -1,16 +1,20 @@
+version: "3.9"
+
 services:
-  # ───────────── Postgres (optional now, needed later) ─────────────
+  # ───────────── Postgres ─────────────
   db:
     image: postgres:16
     container_name: aiins_db
+    restart: unless-stopped
+    env_file: .env
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - "${POSTGRES_PORT}:5432"
+      - "${POSTGRES_PORT:-5432}:5432"   # hostPort:containerPort
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data # persisted data lives here
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
@@ -23,17 +27,19 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: aiins_backend
+    restart: unless-stopped
     env_file: .env
     environment:
+      # IMPORTANT: use service name "db" as the host in DATABASE_URL
+      # e.g. postgresql+psycopg2://appuser:apppass@db:5432/insurancedb
       DATABASE_URL: ${DATABASE_URL}
       OPENAI_API_KEY: ${OPENAI_API_KEY}
-    command: uvicorn app.main:app --host 0.0.0.0 --port ${BACKEND_PORT} --reload
+    command: uvicorn app.main:app --host 0.0.0.0 --port ${BACKEND_PORT:-8000} --reload
     volumes:
-      - ./backend:/app
-      - ./data:/data:ro
+      - ./backend:/app               # live code reload
+      - ./data:/data:ro              # read-only mount for CSVs
     ports:
-      - "${BACKEND_PORT}:${BACKEND_PORT}"
-    # comment this block if you want to ignore db for now
+      - "${BACKEND_PORT:-8000}:${BACKEND_PORT:-8000}"
     depends_on:
       db:
         condition: service_healthy
@@ -44,15 +50,17 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: aiins_frontend
+    restart: unless-stopped
     env_file: .env
     command: npm run dev -- --host
     volumes:
       - ./frontend:/app
       - /app/node_modules
     ports:
-      - "${FRONTEND_PORT}:5173"
+      - "${FRONTEND_PORT:-5173}:5173"
     depends_on:
       - backend
 
+# ───────────── Named volumes (persist across container rebuilds) ─────────────
 volumes:
   pgdata:
