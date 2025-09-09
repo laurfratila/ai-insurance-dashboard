@@ -25,3 +25,12 @@ Thumbs.db
 
 # Data
 data/
+
+# data & EDA dirs
+data/
+data/out/claims.csv
+data/out/customers.csv
+backend/AI/policies_export.csv
+backend/AI/claims_export.csv
+backend/AI/customers_export.csv
+backend/AI/EDA
