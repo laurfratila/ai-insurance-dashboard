@@ -25,7 +25,9 @@ This project delivers **AI-powered dashboards** for insurance operations, enabli
 ├─ backend/              # FastAPI app
 │   ├─ app/
 │   │   ├─ main.py       # backend entrypoint
-│   │   └─ routers/marts.py  # marts endpoints
+│   │   └─ routers
+│ │ ├─ marts.py # marts endpoints
+│ │ └─ overview.py # overview endpoints
 │   ├─ scripts/          # data loading + SQL builds
 │   │   ├─ load_to_db.py
 │   │   ├─ build_core.sql
@@ -157,9 +159,19 @@ docker compose exec backend python scripts/rebuild_analytics.py
 
 ##  API Endpoints
 
+### Default
+- **Health check** → `/health`
+
+### Marts
 - **Claims by month** → `/api/marts/claims_by_month`
-- **Loss ratio by month** → `/api/marts/loss_ratio_by_month`
 - **Claims by county** → `/api/marts/claims_by_county`
+
+### Overview
+- **Loss ratio by month** → `/api/overview/loss_ratio_by_month`
+- **Gross written premium (GWP) by period** → `/api/overview/gwp_by_period`
+- **Claims frequency by period** → `/api/overview/claims_frequency_by_period`
+- **Average settlement time by period** → `/api/overview/avg_settlement_time_by_period`
+
 
 Example:
 ```bash
@@ -211,3 +223,37 @@ docker compose exec backend python scripts/rebuild_analytics.py
 
 ---
 
+#  Importing Materialized Views ( for dashboards )
+
+##  Step 1 — Import into local DB
+
+### If Postgres is running directly on your machine
+```bash
+pg_restore -h localhost -p 5432 -U appuser -d insurancedb \
+  --clean --if-exists -n marts marts_full.dump
+```
+- `--clean --if-exists` → drops existing objects in `marts` before restoring.
+- `-n marts` → restores only into the `marts` schema.
+
+
+### If Postgres runs inside Docker
+```bash
+# Copy the dump into the db container and restore it
+
+docker cp marts_full.dump aiins_db:/tmp/marts_full.dump
+docker exec -it aiins_db pg_restore -U appuser -d insurancedb \
+  --clean --if-exists -n marts /tmp/marts_full.dump
+```
+
+---
+
+##  Step 2 — Verify
+```bash
+# List restored materialized views
+psql -h localhost -p 5432 -U appuser -d insurancedb -c "\\dm+ marts.*"
+
+# Check sample data
+psql -h localhost -p 5432 -U appuser -d insurancedb -c "SELECT * FROM marts.gwp_by_month LIMIT 5;"
+```
+
+---
