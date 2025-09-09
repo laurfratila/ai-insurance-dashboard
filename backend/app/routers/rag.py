@@ -10,6 +10,7 @@ from app.db import engine
 
 # Our NL→Plan→SQL orchestrator
 from AI.LLM.retriever import answer_question
+from AI.LLM.logging import rag_logger
 
 router = APIRouter(prefix="/api/rag", tags=["rag"])
 
@@ -43,6 +44,7 @@ def rag_ask(req: AskReq):
     Uses the LLM planner → safe SQL → execution pipeline.
     """
     q = req.question.strip()
+    user_id = "demo" # TODO: replace with real user ID when auth is added
     if len(q) < 3:
         raise HTTPException(status_code=400, detail="Question too short.")
 
@@ -50,5 +52,15 @@ def rag_ask(req: AskReq):
         with engine.connect() as conn:  # same pattern as your other routers
             result = answer_question(conn, q, allow_pii=False, user_id="demo")
         return result
+    except HTTPException as e:
+        rag_logger.error(
+            f"RAG ❌ | user_id={user_id} | question={(req.question[:80] + '...' if len(req.question) > 80 else req.question)} | "
+            f"HTTP {e.status_code} | Detail: {e.detail}"
+        )
+        raise e
     except Exception as e:
+        rag_logger.error(
+            f"RAG ❌ | user_id={user_id} | question={(req.question[:80] + '...' if len(req.question) > 80 else req.question)} | "
+            f"Exception: {str(e)}"
+        )
         raise HTTPException(status_code=400, detail=f"Could not answer the question. {e}")

@@ -87,13 +87,15 @@ def answer_question(
         "model": llm_meta.get("model")
 
     }
+    summary_text = summary_result.get("summary", "[no summary]")
     rag_logger.info(
-    f"RAG Query | user_id={user_id} | question={(question[:80] + '...' if len(question) > 80 else question)} | "
-    f"model={meta.get('model')} | llm_latency={meta.get('llm_latency_ms')}ms | "
-    f"summary_latency={meta.get('summary_llm_latency_ms')}ms | "
-    f"tokens={meta.get('token_usage', {}).get('total')} | "
-    f"citations={[c['title'] for c in citations]}"
+        f"RAG ✅ | user_id={user_id} | question={(question[:80] + '...' if len(question) > 80 else question)} | "
+        f"rows={len(rows)} | summary={summary_text} | "
+        f"model={meta.get('model')} | latency={meta.get('total_latency_ms')}ms | "
+        f"tokens={llm_meta.get('token_usage', {}).get('total')} | "
+        f"citations={[c['title'] for c in citations]}"
 )
+    
     return {
         "answer": {
             "rows": rows,
