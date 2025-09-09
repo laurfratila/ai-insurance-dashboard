@@ -1,7 +1,6 @@
 # backend/AI/LLM/dsl.py
-
 """
-Plan (mini-DSL) for safe NL→SQL.
+Plan (mini-DSL) for safe NL→SQL (Pydantic v2 compatible).
 
 The LLM must output a JSON object that matches Plan.
 We then validate and normalize it (qualify columns, clamp limits, etc.).
@@ -9,19 +8,16 @@ We then validate and normalize it (qualify columns, clamp limits, etc.).
 
 from __future__ import annotations
 
-from typing import List, Literal, Optional, Set, Tuple, Dict
-from pydantic import BaseModel, Field, root_validator, validator # type: ignore
+from typing import List, Literal, Set, Tuple, Dict, Any
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 from .schema import (
-    ALLOWED_VIEWS,
     ALLOWED_OPERATORS,
     DEFAULT_LIMIT,
     MAX_LIMIT,
     columns_for,
-    fq,
     is_allowed_column,
     is_allowed_join,
-    list_views,
     pii_for,
 )
 
@@ -35,7 +31,7 @@ Op = Literal["=", "<>", ">", ">=", "<", "<=", "ILIKE", "BETWEEN", "IN"]
 class Filter(BaseModel):
     col: str
     op: Op
-    val: object  # str | float | int | [start, end] for BETWEEN | list for IN
+    val: Any  # str | float | int | [start, end] for BETWEEN | list for IN
 
 
 class Order(BaseModel):
@@ -59,37 +55,46 @@ class Plan(BaseModel):
     qualified_order_by: List[Tuple[str, str]] = Field(default_factory=list)  # (col, dir)
     contains_pii: bool = False
 
-    # ------------- Validators -------------
+    # ------------- Validators (Pydantic v2) -------------
 
-    @validator("limit", pre=True, always=True)
-    def _clamp_limit(cls, v: int) -> int:
+    @field_validator("limit", mode="before")
+    @classmethod
+    def _clamp_limit(cls, v: Any) -> int:
         try:
             v = int(v)
         except Exception:
             v = DEFAULT_LIMIT
         return min(max(v, 1), MAX_LIMIT)
 
-    @validator("joins", each_item=True)
-    def _check_join(cls, edge: str) -> str:
-        if not is_allowed_join(edge):
-            raise ValueError(f"Join not allowed: {edge}")
-        return edge
+    @field_validator("joins", mode="before")
+    @classmethod
+    def _validate_joins(cls, joins: Any) -> Any:
+        if joins is None:
+            return []
+        for edge in joins:
+            if not is_allowed_join(edge):
+                raise ValueError(f"Join not allowed: {edge}")
+        return joins
 
-    @validator("filters", each_item=True)
-    def _check_filter_ops(cls, f: Filter) -> Filter:
-        if f.op not in ALLOWED_OPERATORS:
-            raise ValueError(f"Operator not allowed: {f.op}")
-        return f
+    @field_validator("filters", mode="before")
+    @classmethod
+    def _validate_filters_ops(cls, filters: Any) -> Any:
+        if filters is None:
+            return []
+        for f in filters:
+            if f.get("op") not in ALLOWED_OPERATORS:
+                raise ValueError(f"Operator not allowed: {f.get('op')}")
+        return filters
 
-    @root_validator
-    def _normalize_and_validate(cls, values):
-        base: str = values.get("view")
-        joins: List[str] = values.get("joins", [])
-        select: List[str] = values.get("select", [])
-        group_by: List[str] = values.get("group_by", [])
-        order_by: List[Order] = values.get("order_by", [])
-        filters: List[Filter] = values.get("filters", [])
-        aggregations: List[str] = values.get("aggregations", [])
+    @model_validator(mode="after")
+    def _normalize_and_validate(self) -> "Plan":
+        base: str = self.view
+        joins: List[str] = self.joins or []
+        select: List[str] = self.select or []
+        group_by: List[str] = self.group_by or []
+        order_by: List[Order] = self.order_by or []
+        filters: List[Filter] = self.filters or []
+        aggregations: List[str] = self.aggregations or []
 
         # Determine reachable views
         reachable: Set[str] = {base}
@@ -105,7 +110,7 @@ class Plan(BaseModel):
                 # already qualified; trust but verify
                 if not is_allowed_column(col):
                     raise ValueError(f"Column not allowed: {col}")
-                v, c = col.split(".", 1)
+                v, _ = col.split(".", 1)
                 if v not in reachable:
                     raise ValueError(f"Column {col} not reachable (missing join).")
                 return col
@@ -139,12 +144,14 @@ class Plan(BaseModel):
         def check_agg(a: str) -> None:
             low = a.lower().strip()
             if low.startswith("count("):
+                # allow count(*), count(col) as alias, etc.
                 return
             for fn in ("sum(", "avg(", "min(", "max("):
-                if low.startswith(fn) and low.endswith(")") or " as " in low:
-                    # Try to extract the column before any alias
-                    inner = low.split(" as ")[0]
-                    inner = inner[inner.find("(") + 1 : inner.rfind(")")]
+                if low.startswith(fn):
+                    # Extract inner column up to ')' (before optional ' as ')
+                    inner_part = low.split(" as ")[0]
+                    inner = inner_part[inner_part.find("(") + 1 : inner_part.rfind(")")]
+                    # Qualify to ensure it's allowed/reachable
                     _ = qualify(inner)
                     return
             # also allow "count(*) as something"
@@ -157,19 +164,22 @@ class Plan(BaseModel):
 
         # PII detection
         pii_used = False
-        for q in q_select + q_group + [c for c, _ in q_order] + [f.col if "." in f.col else qualify(f.col) for f in filters]:
-            v, c = q.split(".", 1) if "." in q else (base, q)
+        # Build a list of qualified columns appearing in select/group/order and filters
+        qualified_filter_cols = []
+        for f in filters:
+            qualified_filter_cols.append(f.col if "." in f.col else qualify(f.col))
+        for q in q_select + q_group + [c for c, _ in q_order] + qualified_filter_cols:
+            v, c = q.split(".", 1)
             if c in pii_for(v):
                 pii_used = True
                 break
 
         # Save qualified artifacts
-        values["qualified_select"] = q_select
-        values["qualified_group_by"] = q_group
-        values["qualified_order_by"] = q_order
-        values["contains_pii"] = pii_used
-
-        return values
+        self.qualified_select = q_select
+        self.qualified_group_by = q_group
+        self.qualified_order_by = q_order
+        self.contains_pii = pii_used
+        return self
 
     # Convenience: get all reachable views (base + joins)
     def reachable_views(self) -> Set[str]:
@@ -180,3 +190,6 @@ class Plan(BaseModel):
             elif j == "claims->policies":
                 r.update({"claims", "policies"})
         return r
+    
+
+    

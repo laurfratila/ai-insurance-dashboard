@@ -147,6 +147,6 @@ def build_plan_from_nl(question: str) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     meta = {
         "llm_latency_ms": round((time.time() - t0) * 1000),
         "token_usage": token_usage,
-        "model": os.environ.get("RAG_PLANNER_MODEL", "gpt-4o-mini"),
+        "model": os.environ.get("RAG_PLANNER_MODEL"),
     }
     return plan_dict, meta
