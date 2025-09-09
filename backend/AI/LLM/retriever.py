@@ -57,6 +57,21 @@ def answer_question(
     # 🔎 Detect intent
     intent = detect_intent(question)
 
+    if intent == "offtopic":
+        return {
+            "answer": {
+                "rows": [],
+                "count": 0,
+                "summary": "I'm here to help you with insurance-related questions. Try asking me about claims, customers, or KPIs."
+            },
+            "citations": [],
+            "meta": {
+                "intent": "offtopic",
+                "user_id": user_id,
+                "question_hash": _hash_for_logging(question),
+            }
+        }
+
     if intent == "smalltalk":
         summary_text = (
             "I'm doing great, thanks for asking! 😊\n"

@@ -66,7 +66,7 @@ Return ONLY a JSON object with keys:
 - Prefer filters over selecting PII. Include PII columns (email, phone, dob) only if explicitly asked.
 - Qualify columns when needed to avoid ambiguity (e.g., status exists in multiple tables).
 - Dates are strings "YYYY-MM-DD". Use BETWEEN for closed ranges.
-- If the question implies grouping/aggregation (e.g., “how many”, “total”, “average”), add appropriate group_by and aggregations.
+- If the question implies grouping/aggregation (e.g., “how many”, “total”, “average”), always include a group_by clause that contains all non-aggregated fields in the select array.
 - If the question refers to a customer by name and a city, join policies->customers or claims->policies->customers accordingly.
 - If the user asks for recent time windows like "last 30 days", convert to BETWEEN [today-30, today], but leave exact dates blank for the API to fill if not known.
 - If the user asks broadly and no fields are specified, return a sensible narrow selection and set limit to 50.
