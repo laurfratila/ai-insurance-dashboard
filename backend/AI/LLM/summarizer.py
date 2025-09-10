@@ -52,7 +52,6 @@ def summarize_rows(question: str, rows: List[Dict[str, Any]], max_rows: int = 30
     - Make sure to add an interpretation for that specific answer.
     - Make suggestions of other insights that the user might want to ask
     - Suggest other related insights questions that we can answer from the materialized views.
-    - When suggesting relevant questions, make the user answer with "Yes" or "No" if he/she wants you to answer them.
     """
 
 
