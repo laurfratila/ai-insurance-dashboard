@@ -4,7 +4,7 @@ import Overview from "./routes/Overview";
 import Claims from "./routes/Claims";
 import Risk from "./routes/Risk";
 import Ops from "./routes/Ops";
-import C360 from "./routes/C360";
+import C360 from "./routes/Customer360";
 import Settings from "./routes/Settings";
 
 export default function App() {
