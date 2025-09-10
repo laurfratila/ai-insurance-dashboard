@@ -76,6 +76,123 @@ ALLOWED_VIEWS: Dict[str, Dict[str, object]] = {
         ],
         "pii": [],
     },
+    # NON-CORE VIEWS ----> MATERIALIZED VIEWS FROM marts_schema.sql
+    "avg_settlement_days_by_month": {
+        "schema": "marts",
+        "columns": ["month_start", "closed_claims", "avg_days", "p50_days", "p90_days"],
+        "pii": []
+    },
+    "backlog_by_age_bucket": {
+        "schema": "marts",
+        "columns": ["as_of", "region_key", "bucket_0_7", "bucket_8_30", "bucket_31_90", "bucket_90_plus", "total_open"],
+        "pii": []
+    },
+    "calendar_months": {
+        "schema": "marts",
+        "columns": ["month_start"],
+        "pii": []
+    },
+    "cat_exposure_by_region": {
+        "schema": "marts",
+        "columns": ["month_start", "region_key", "peril", "exposure_gwp", "claims_count", "loss_paid"],
+        "pii": []
+    },
+    "channel_mix_by_month": {
+        "schema": "marts",
+        "columns": ["month_start", "channel", "gwp", "policies"],
+        "pii": []
+    },
+    "claim_severity_histogram": {
+        "schema": "marts",
+        "columns": ["severity_band", "claim_count", "pct_share"],
+        "pii": []
+    },
+    "claims_by_county": {
+        "schema": "marts",
+        "columns": ["county", "claims_count", "paid_sum"],
+        "pii": []
+    },
+    "claims_by_month": {
+        "schema": "marts",
+        "columns": ["month", "claims_count", "paid_sum"],
+        "pii": []
+    },
+    "claims_by_peril_month": {
+        "schema": "marts",
+        "columns": ["month_start", "peril", "claims_count", "paid_total", "avg_severity"],
+        "pii": []
+    },
+    "claims_count_by_month": {
+        "schema": "marts",
+        "columns": ["month_start", "claims_count"],
+        "pii": []
+    },
+    "policies_in_force_by_month": {
+        "schema": "marts",
+        "columns": ["month_start", "policies_in_force"],
+        "pii": []
+    },
+    "claims_frequency_by_month": {
+        "schema": "marts",
+        "columns": ["month_start", "claims_count", "policies_in_force", "claims_frequency"],
+        "pii": []
+    },
+    "claims_paid_by_month": {
+        "schema": "marts",
+        "columns": ["month_start", "claims_paid"],
+        "pii": []
+    },
+    "claims_paid_vs_reserve_by_month": {
+        "schema": "marts",
+        "columns": ["month_start", "paid_total", "reserve_total"],
+        "pii": []
+    },
+    "cross_sell_distribution": {
+        "schema": "marts",
+        "columns": ["products_count", "customers", "pct_share"],
+        "pii": []
+    },
+    "customer_demographics": {
+        "schema": "marts",
+        "columns": ["age_band", "county_name", "customers"],
+        "pii": []
+    },
+    "earned_premium_by_month": {
+        "schema": "marts",
+        "columns": ["month_start", "earned_premium"],
+        "pii": []
+    },
+    "fnol_by_day": {
+        "schema": "marts",
+        "columns": ["day", "fnol_count"],
+        "pii": []
+    },
+    "gwp_by_month": {
+        "schema": "marts",
+        "columns": ["month_start", "gwp"],
+        "pii": []
+    },
+    "loss_ratio_by_month": {
+        "schema": "marts",
+        "columns": ["month_start", "claims_paid", "earned_premium", "loss_ratio"],
+        "pii": []
+    },
+    "open_vs_closed_ratio_by_month": {
+        "schema": "marts",
+        "columns": ["month_start", "opened_count", "closed_count", "closed_to_open_ratio"],
+        "pii": []
+    },
+    "retention_by_month": {
+        "schema": "marts",
+        "columns": ["month_start", "up_for_renewal", "renewed", "retention_rate"],
+        "pii": []
+    },
+    "sla_breaches_simple": {
+        "schema": "marts",
+        "columns": ["month_start", "breaches_gt_30d", "breaches_gt_60d", "still_open", "total_reported"],
+        "pii": []
+        
+    }
 }
 
 # Allowed join edges (left.col, right.col) in fully-qualified "view.column" form

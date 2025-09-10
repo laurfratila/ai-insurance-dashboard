@@ -19,6 +19,7 @@ from .schema import (
     is_allowed_column,
     is_allowed_join,
     pii_for,
+    list_views
 )
 
 # -------------------------
@@ -40,7 +41,7 @@ class Order(BaseModel):
 
 
 class Plan(BaseModel):
-    view: Literal["customers", "policies", "claims"]
+    view: str  # temporarily accept all, validate below
     select: List[str] = Field(default_factory=list)
     filters: List[Filter] = Field(default_factory=list)
     joins: List[str] = Field(default_factory=list)  # e.g., ["policies->customers","claims->policies"]
@@ -88,6 +89,8 @@ class Plan(BaseModel):
 
     @model_validator(mode="after")
     def _normalize_and_validate(self) -> "Plan":
+        if self.view not in list_views():
+            raise ValueError(f"Unknown view: {self.view}. Must be one of {list_views()}")
         base: str = self.view
         joins: List[str] = self.joins or []
         select: List[str] = self.select or []
@@ -217,7 +220,8 @@ class Plan(BaseModel):
             missing = [c for c in q_select if c not in group_set]
             if missing:
                 raise ValueError(
-                    f"When using aggregations, all selected columns must be in group_by. Missing: {missing}"
+                       f"When using aggregations, all non-aggregated selected columns must appear in group_by. Missing: {missing}. "
+                    "Remove detailed fields like claim_id unless needed for row-level output."
                 )
 
         for a in aggregations:

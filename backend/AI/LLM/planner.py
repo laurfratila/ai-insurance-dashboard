@@ -20,6 +20,7 @@ from typing import Dict, Tuple, Any, List
 from openai import OpenAI # type: ignore
 
 from .schema import ALLOWED_VIEWS, JOIN_RULES, ALLOWED_OPERATORS, DEFAULT_LIMIT, MAX_LIMIT
+from .example_plans import EXAMPLE_PLAN
 
 
 # -------------------------
@@ -66,11 +67,17 @@ Return ONLY a JSON object with keys:
 - Use ONLY the views/columns/joins/operators provided in the SCHEMA below.
 - Prefer filters over selecting PII. Include PII columns (email, phone, dob) only if explicitly asked.
 - Qualify columns when needed to avoid ambiguity (e.g., status exists in multiple tables).
+- The plan must always start FROM the base view that the question is focused on (e.g., claims if counting claims), and JOIN other tables as needed. Do not assume availability of a table unless it was part of the FROM clause or a JOIN.
 - Dates are strings "YYYY-MM-DD". Use BETWEEN for closed ranges.
 - If the plan contains aggregation functions (SUM, COUNT, AVG, etc.), and you are selecting other columns, you MUST include all non-aggregated columns in the group_by array.
 - The group_by must match exactly all non-aggregated columns from the select list.
+- When grouping data (e.g., to count claims per customer), only include identifying fields (e.g., customer_id, full_name, policy_id) in the group_by and select arrays. Avoid unnecessary fields like claim_id if they are not being counted individually.
+- Do not select claim_id or other record-level fields unless you intend to show raw rows (which is rare when aggregating).
 - Do NOT include a raw column like policies.gross_premium in the select array if you're already using it in an aggregation (e.g., avg(policies.gross_premium)).
 - If the question refers to a customer by name and a city, join policies->customers or claims->policies->customers accordingly.
+- If the question is about “open claims by age”, use the materialized view: marts.backlog_by_age_bucket.
+    - Use columns: region_key, as_of, bucket_0_7, bucket_8_30, bucket_31_90, bucket_90_plus, total_open.
+    - Do NOT use raw core.claims.
 - If the user asks for a percentage of customers matching a filter (e.g., age group, city), calculate both the filtered count and the total count using COUNT() and use them to compute the percentage.
 - Use a COUNT(*) FILTER (WHERE ...) as aged_group, and a second COUNT(*) as total_customers.
 - If the user asks for recent time windows like "last 30 days", convert to BETWEEN [today-30, today], but leave exact dates blank for the API to fill if not known.
@@ -79,70 +86,23 @@ Return ONLY a JSON object with keys:
 - If the question asks “how much” or “total” about financial values (like amounts paid, reserved, premiums), use SUM() aggregations on the appropriate fields (e.g., claims.paid, claims.reserve, policies.gross_premium).
 - NEVER use SELECT * in such cases. Only return necessary columns or aggregations.
 - If the question asks for a comparison between two metrics (e.g., paid vs reserved), include both in the aggregation list.
+- If a question is about claims or policy trends over time (e.g., per month, by region, by channel, etc.), prefer using marts views like `claims_by_month`, `channel_mix_by_month`, or `cat_exposure_by_region`.
+- Only use core tables if the user is asking for detailed, raw-level information (e.g., specific customers or claims).
+- Marts views should be used whenever the metrics match the question — for example:
+  - avg_settlement_days_by_month → for average settlement durations
+  - channel_mix_by_month → for channel splits
+  - claims_by_county → for claim counts by geography, and so on.
+- If using a marts view like `avg_settlement_days_by_month`, do NOT apply an extra aggregation like AVG() on top of columns like `avg_days`, `p90_days`, `p50_days`, etc. These columns are already monthly aggregates.
+    - Instead, SELECT the column (e.g., avg_days) along with month_start, and ORDER BY month_start.
+- For open claims older than X days, use the marts.backlog_by_age_bucket view.
+- Select bucket_90_plus when asking for “older than 90 days”.
+- Use region_key for grouping.
+- Avoid raw joins over core.claims/policies/customers.
 
 
 ### IMPORTANT
 Return ONLY the JSON. No prose, no markdown, no extra keys.
 """
-
-
-# A tiny, realistic example shown to the model to anchor format.
-# Keep this minimal to avoid excessive token usage.
-EXAMPLE_PLAN = [
-    {
-        "view": "policies",
-        "select": ["policies.product_type", "policies.channel", "policies.status"],
-        "filters": [
-            {"col": "customers.city", "op": "ILIKE", "val": "Cluj%"},
-            {"col": "policies.status", "op": "=", "val": "active"}
-        ],
-        "joins": ["policies->customers"],
-        "group_by": ["policies.product_type", "policies.channel", "policies.status"],
-        "aggregations": ["count(*) as policies", "sum(policies.gross_premium) as premium"],
-        "order_by": [{"col": "premium", "dir": "desc"}],
-        "limit": 50
-    },
-    {
-        "view": "claims",
-        "select": [],
-        "filters": [
-            {"col": "claims.loss_date", "op": "BETWEEN", "val": ["2024-01-01", "2024-12-31"]}
-        ],
-        "joins": [],
-        "group_by": [],
-        "aggregations": [
-            "sum(claims.paid) as total_paid",
-            "sum(claims.reserve) as total_reserved"
-        ],
-        "order_by": [],
-        "limit": 1
-    },
-    {
-        "view": "policies",
-        "select": [],
-        "filters": [
-            {"col": "policies.product_type", "op": "=", "val": "auto"}
-        ],
-        "joins": [],
-        "group_by": [],
-        "aggregations": ["avg(policies.gross_premium) as avg_premium"],
-        "order_by": [],
-        "limit": 1
-    },
-    {
-    "view": "customers",
-    "select": [],
-    "filters": [],
-    "joins": [],
-    "group_by": [],
-    "aggregations": [
-        "count(*) FILTER (WHERE customers.dob BETWEEN '1993-01-01' AND '2003-12-31') as aged_20_30",
-        "count(*) as total_customers"
-    ],
-    "order_by": [],
-    "limit": 1
-    }
-]
 
 # -------------------------
 # Public API
