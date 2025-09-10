@@ -94,6 +94,33 @@ def answer_question(
                 "question_hash": _hash_for_logging(question),
             }
         }
+    
+    if intent == "help":
+        summary_text = (
+            "Of course! I'm here to assist you with insights from your insurance data.\n\n"
+            "You can ask me questions like:\n"
+            "• What is the average claim settlement time in 2024?\n"
+            "• Which county had the most claims?\n"
+            "• How many policies were renewed in Q2?\n\n"
+            "Would you like to explore one of these topics?"
+        )
+        rag_logger.info(
+            f"RAG 🙋 Help | user_id={user_id} | question={(question[:80] + '...' if len(question) > 80 else question)}"
+        )
+        return {
+            "answer": {
+                "rows": [],
+                "count": 0,
+                "summary": summary_text
+            },
+            "citations": [],
+            "meta": {
+                "intent": "help",
+                "user_id": user_id,
+                "question_hash": _hash_for_logging(question),
+            }
+        }
+
 
     # 1) NL → Plan (dict) via the LLM planner
     plan_dict, llm_meta = build_plan_from_nl(question)
