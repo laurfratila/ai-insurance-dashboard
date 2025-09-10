@@ -16,14 +16,14 @@ from typing import Any, Dict, List
 from openai import OpenAI # type: ignore
 
 
-def summarize_rows(question: str, rows: List[Dict[str, Any]], max_rows: int = 5) -> Dict[str, Any]:
+def summarize_rows(question: str, rows: List[Dict[str, Any]], max_rows: int = 30) -> Dict[str, Any]:
     """
     Summarize query results into a concise explanation.
 
     Args:
         question: the original user question (string).
         rows: list of dicts returned from the DB query.
-        max_rows: maximum number of rows to include in context (default=5).
+        max_rows: maximum number of rows to include in context (default=30).
 
     Returns:
         {
@@ -38,17 +38,23 @@ def summarize_rows(question: str, rows: List[Dict[str, Any]], max_rows: int = 5)
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
     # Keep the first few rows as JSON context
-    snippet = rows[:max_rows]
+    snippet = rows[:max_rows] if max_rows else rows
 
-    system_prompt = """You are an analytics assistant with expertise in insurance industry.
-Given a user question and some tabular results, write a short factual summary.
-- Be concise (2–3 sentences).
-- Use only the data provided.
-- Do not hallucinate.
-- If rows contain numeric aggregates, highlight the key values.
-- Do not say "approximately" unless the data includes a range or estimate.
-- Offer a short interpretation of the numbers with respect to our data.
-"""
+    system_prompt = """You are an analytics assistant.
+    Given a user question and some tabular results, write a short, factual summary.
+    - Be concise and list values clearly.
+    - Use only the data provided.
+    - Do not guess or hallucinate.
+    - If the data includes values by month (e.g., month_start and avg_days), return a list like:
+    "January: X days, February: Y days, …"
+    - Format months as full names.
+    - Always include the exact values from the rows.
+    - Make sure to add an interpretation for that specific answer.
+    - Make suggestions of other insights that the user might want to ask
+    - Suggest other related insights questions that we can answer from the materialized views.
+    - When suggesting relevant questions, make the user answer with "Yes" or "No" if he/she wants you to answer them.
+    """
+
 
     user_prompt = f"Question: {question}\nRows: {snippet}"
 
@@ -60,7 +66,7 @@ Given a user question and some tabular results, write a short factual summary.
             {"role": "user", "content": user_prompt},
         ],
         temperature=0.2,
-        max_tokens=200,
+        max_tokens=400,
     )
     latency_ms = round((time.time() - t0) * 1000)
 
