@@ -1,4 +1,25 @@
-node_modules
-dist
-.vscode
-.DS_Store
+# VCS & IDE
+.git/
+.gitignore
+.vscode/
+.idea/
+
+# OS cruft
+**/.DS_Store
+**/Thumbs.db
+**/*.lnk
+**/*.url
+**/*.tmp
+**/*.log
+
+# Node / builds
+node_modules/
+dist/
+build/
+.next/
+.pnpm-store/
+*.tsbuildinfo
+
+# Misc
+**/*.swp
+**/*.swo

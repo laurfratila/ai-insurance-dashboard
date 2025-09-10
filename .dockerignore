@@ -1,0 +1,32 @@
+# VCS & IDE
+.git/
+.gitignore
+.vscode/
+.idea/
+
+# OS cruft
+**/.DS_Store
+**/Thumbs.db
+**/*.lnk
+**/*.tmp
+**/*.log
+
+# Python
+**/__pycache__/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+.venv/
+env/
+*.pyc
+
+# Node / front-end
+**/node_modules/
+**/.next/
+**/build/
+**/dist/
+frontend/.pnpm-store/
+
+# Data / misc
+data/
+tmp/
