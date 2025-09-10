@@ -1,63 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* light tokens */
 :root{
   --page:#f7f8fb;
   --panel:#ffffff;
-  --ink:#0f172a;
-  --muted:#6b7280;
-  --ring:#e5e7eb;
-  --brand:#f43f5e;
-  --good:#16a34a;
-  --bad:#ef4444;
-  --shadow:0 1px 2px rgba(2,6,23,.06), 0 12px 24px -18px rgba(2,6,23,.18);
 }
-
-*{box-sizing:border-box}
 html,body,#root{height:100%}
-body{margin:0;background:var(--page);color:var(--ink);font:15px/1.5 system-ui, Segoe UI, Inter, Roboto, sans-serif}
-
-a{color:inherit}
-.container{max-width:1200px;margin:0 auto}
-
-.app-card{
-  background:var(--panel);
-  border:1px solid var(--ring);
-  border-radius:14px;
-  box-shadow:var(--shadow);
-}
-
-.h1{font-size:34px; line-height:1.2; margin:0 0 14px 0; letter-spacing:.2px}
-.subtle{color:var(--muted); font-size:12px}
-
-.input, .btn{
-  border:1px solid var(--ring);
-  border-radius:10px;
-  padding:8px 10px;
-  background:#fff;
-  font:inherit;
-}
-.btn{background:#f9fafb; cursor:pointer}
-.btn:active{transform:translateY(1px)}
-
-
-/* Sidebar nav — readable states */
-.navlink{
-  display:flex; align-items:center; gap:10px;
-  padding:10px 12px;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:700;
-  letter-spacing:.2px;
-  color: rgba(255,255,255,.96);        /* strong contrast */
-}
-.navlink:hover{
-  background: rgba(255,255,255,.14);   /* subtle hover */
-  color:#fff;
-}
-.navlink:focus-visible{
-  outline:2px solid #fff; outline-offset:2px;
-}
-.navlink.active{
-  background:#ffffff;                  /* clear selection */
-  color:#111827;                       /* dark text on white */
-  box-shadow: 0 1px 2px rgba(0,0,0,.06);
-}
-
+body{background:var(--page); color:#0f172a; font:15px/1.5 system-ui, Segoe UI, Inter, Roboto, sans-serif}

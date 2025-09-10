@@ -1,14 +1,37 @@
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../lib/api";
-import { Bell, LayoutDashboard, FileText, ShieldAlert, Workflow, Users, Settings } from "lucide-react";
-import React from "react";
+import { Button } from "@/components/ui/button";
+import ChatDock from "@/features/chat/ChatDock";
 
-function NavItem({ to, label, icon: Icon }: { to: string; label: string; icon: React.ComponentType<any> }) {
+import {
+  Bell,
+  MessageSquare,
+  LayoutDashboard,
+  FileText,
+  ShieldAlert,
+  Workflow,
+  Users,
+  Settings,
+} from "lucide-react";
+
+function NavItem({
+  to,
+  label,
+  icon: Icon,
+}: {
+  to: string;
+  label: string;
+  icon: React.ComponentType<any>;
+}) {
   return (
     <NavLink
       to={to}
-      className={({ isActive }) => `navlink ${isActive ? "active" : ""}`}
+      className={({ isActive }) =>
+        `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition
+         ${isActive ? "bg-white text-slate-900 shadow-soft" : "text-white/95 hover:bg-white/15"}`
+      }
     >
       <Icon size={18} />
       <span>{label}</span>
@@ -20,53 +43,62 @@ export default function Shell({ children }: { children: React.ReactNode }) {
   const health = useQuery({
     queryKey: ["health"],
     queryFn: async () => (await api.get("/health")).data,
-    refetchInterval: 30000,
+    refetchInterval: 30_000,
   });
-  const healthy = health.data?.status === "ok";
+  const ok = health.data?.status === "ok";
+
+  // Chat dock toggle
+  const [chatOpen, setChatOpen] = useState(true);
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "248px 1fr", minHeight: "100vh" }}>
-      <aside
-        className="sidebar"
-        style={{
-          background: "linear-gradient(180deg, var(--brand), #be123c)",
-          color: "white",
-          padding: 22,
-        }}
-        aria-label="Sidebar navigation"
-      >
-        <div style={{ fontSize: 24, fontWeight: 900, marginBottom: 18, letterSpacing: 0.2 }}>EnsuraX</div>
-        <nav style={{ display: "grid", gap: 6 }}>
+    <div
+      className="grid min-h-screen"
+      style={{ gridTemplateColumns: chatOpen ? "260px 1fr 360px" : "260px 1fr" }}
+    >
+      {/* Sidebar */}
+      <aside className="bg-gradient-to-b from-brand to-brand-dark text-white p-6">
+        <div className="text-2xl font-black tracking-tight mb-4">EnsuraX</div>
+        <nav className="grid gap-1">
           <NavItem to="/overview" label="Overview" icon={LayoutDashboard} />
           <NavItem to="/claims" label="Claims" icon={FileText} />
           <NavItem to="/risk" label="Risk & Fraud" icon={ShieldAlert} />
           <NavItem to="/ops" label="Operations" icon={Workflow} />
           <NavItem to="/c360" label="Customer 360" icon={Users} />
-          <div style={{ height: 16 }} />
+          <div className="h-3" />
           <NavItem to="/settings" label="Settings" icon={Settings} />
         </nav>
       </aside>
 
-      <div style={{ padding: 24 }}>
-        <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
+      {/* Main column */}
+      <div className="p-6">
+        <header className="flex items-center justify-between mb-4">
           <div />
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div className="flex items-center gap-2">
+            <Button
+              variant={chatOpen ? "secondary" : "outline"}
+              size="sm"
+              className="gap-2"
+              onClick={() => setChatOpen((v) => !v)}
+            >
+              <MessageSquare size={16} />
+              {chatOpen ? "Hide Assistant" : "Show Assistant"}
+            </Button>
+
             <span
-              title={healthy ? "Backend: OK" : "Backend: unavailable"}
-              style={{
-                width: 10,
-                height: 10,
-                borderRadius: "50%",
-                background: healthy ? "var(--good)" : "var(--bad)",
-              }}
+              className={`size-2 rounded-full ${ok ? "bg-emerald-600" : "bg-rose-500"}`}
+              title={ok ? "Backend: OK" : "Backend: down"}
             />
-            <button className="btn" title="Notifications" style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <Button variant="outline" size="sm" className="gap-2">
               <Bell size={16} /> Notifications
-            </button>
+            </Button>
           </div>
         </header>
-        <div className="container">{children}</div>
+
+        <main className="max-w-[1200px] mx-auto">{children}</main>
       </div>
+
+      {/* Right chat dock (persistent across pages) */}
+      {chatOpen && <ChatDock visible={chatOpen} onToggle={() => setChatOpen(false)} />}
     </div>
   );
 }

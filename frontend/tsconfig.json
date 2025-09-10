@@ -1,7 +1,34 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    /* Language & emit */
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "jsx": "react-jsx",
+    "noEmit": true,
+
+    /* Module resolution (Vite-friendly) */
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+
+    /* Type checking */
+    "strict": true,
+    "skipLibCheck": true,
+
+    /* Libs */
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+
+    /* Paths/Aliases (needed for shadcn/ui) */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    /* Vite typings */
+    "types": ["vite/client"]
+  },
+  "include": ["src", "vite-env.d.ts"],
+  "exclude": ["dist", "node_modules"]
 }
