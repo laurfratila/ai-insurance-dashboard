@@ -30,7 +30,7 @@ function NavItem({
       to={to}
       className={({ isActive }) =>
         `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition
-         ${isActive ? "bg-white text-slate-900 shadow-soft" : "text-white/95 hover:bg-white/15"}`
+         ${isActive ? "bg-white text-slate-900 shadow-soft" : "text-white/95 hover:bg-white/10"}`
       }
     >
       <Icon size={18} />
@@ -56,7 +56,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
       style={{ gridTemplateColumns: chatOpen ? "260px 1fr 360px" : "260px 1fr" }}
     >
       {/* Sidebar */}
-      <aside className="bg-gradient-to-b from-brand to-brand-dark text-white p-6">
+      <aside className="bg-gradient-to-b from-indigo-950 to-slate-900 text-white p-6">
         <div className="text-2xl font-black tracking-tight mb-4">EnsuraX</div>
         <nav className="grid gap-1">
           <NavItem to="/overview" label="Overview" icon={LayoutDashboard} />
