@@ -10,6 +10,8 @@ export function useFnol(p: DateRange) {
     // NOTE: /api/ops/...
     queryFn: async () =>
       (await api.get<TimeSeriesPoint[]>("/api/ops/fnol", { params: p })).data,
+    refetchInterval: 5000,
+    refetchOnWindowFocus: true,
   });
 }
 

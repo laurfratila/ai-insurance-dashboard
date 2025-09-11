@@ -19,20 +19,32 @@ export default function ChatDock({ initialWidth = 360, visible, onToggle }: Chat
   const [width, setWidth] = useState(initialWidth);
   const [drag, setDrag] = useState<null | { startX: number; startW: number }>(null);
 
-  const [messages, setMessages] = useState<ChatMessage[]>([{
-    id: crypto.randomUUID(),
-    role: "assistant",
-    content:
-      "Hi, I’m the EnsuraX assistant. Ask me natural questions about GWP, loss ratio, claims, or operations.\n\nExamples:\n• “What’s our loss ratio trend YTD?”\n• “Top products by claims frequency last 6 months”\n• “Why did LR increase in August?”",
-    createdAt: new Date().toISOString(),
-  }]);
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    {
+      id: crypto.randomUUID(),
+      role: "assistant",
+      content:
+        "Hi, I’m the EnsuraX assistant. Ask me natural questions about GWP, loss ratio, claims, or operations.\n\nExamples:\n• “What’s our loss ratio trend YTD?”\n• “Top products by claims frequency last 6 months”\n• “Why did LR increase in August?”",
+      createdAt: new Date().toISOString(),
+    },
+  ]);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // always keep the newest message in view
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
-  }, [messages, visible]);
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+  }, [messages.length, visible]);
+
+  // focus input on open
+  useEffect(() => {
+    if (visible) inputRef.current?.focus();
+  }, [visible]);
 
   function startDrag(e: React.MouseEvent) {
     setDrag({ startX: e.clientX, startW: width });
@@ -42,21 +54,30 @@ export default function ChatDock({ initialWidth = 360, visible, onToggle }: Chat
     const next = Math.max(320, Math.min(720, drag.startW - (drag.startX - e.clientX)));
     setWidth(next);
   }
-  function onUp() { setDrag(null); }
+  function onUp() {
+    setDrag(null);
+  }
   useEffect(() => {
     if (!drag) return;
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseup", onUp, { once: true });
-    return () => { window.removeEventListener("mousemove", onMove); };
+    return () => window.removeEventListener("mousemove", onMove);
   }, [drag]);
 
   async function send() {
     const text = input.trim();
-    if (!text) return;
-    const userMsg: ChatMessage = { id: crypto.randomUUID(), role: "user", content: text, createdAt: new Date().toISOString() };
+    if (!text || sending) return;
+
+    const userMsg: ChatMessage = {
+      id: crypto.randomUUID(),
+      role: "user",
+      content: text,
+      createdAt: new Date().toISOString(),
+    };
     setMessages((m) => [...m, userMsg]);
     setInput("");
     setSending(true);
+
     try {
       const reply = await adapter.ask({ messages: [...messages, userMsg], sessionId: getSessionId() });
       let botMsg: ChatMessage;
@@ -77,10 +98,18 @@ export default function ChatDock({ initialWidth = 360, visible, onToggle }: Chat
       }
       setMessages((m) => [...m, botMsg]);
     } catch (err: any) {
-      const botMsg: ChatMessage = { id: crypto.randomUUID(), role: "assistant", content: `⚠️ ${err?.message ?? "Chat error"}`, createdAt: new Date().toISOString() };
-      setMessages((m) => [...m, botMsg]);
+      setMessages((m) => [
+        ...m,
+        {
+          id: crypto.randomUUID(),
+          role: "assistant",
+          content: `⚠️ ${err?.message ?? "Chat error"}`,
+          createdAt: new Date().toISOString(),
+        },
+      ]);
     } finally {
       setSending(false);
+      inputRef.current?.focus();
     }
   }
 
@@ -92,11 +121,15 @@ export default function ChatDock({ initialWidth = 360, visible, onToggle }: Chat
   }
 
   function clearChat() {
-    setMessages([{
-      id: crypto.randomUUID(), role: "assistant",
-      content: "Conversation cleared. How can I help next?",
-      createdAt: new Date().toISOString(),
-    }]);
+    setMessages([
+      {
+        id: crypto.randomUUID(),
+        role: "assistant",
+        content: "Conversation cleared. How can I help next?",
+        createdAt: new Date().toISOString(),
+      },
+    ]);
+    inputRef.current?.focus();
   }
 
   if (!visible) {
@@ -110,8 +143,15 @@ export default function ChatDock({ initialWidth = 360, visible, onToggle }: Chat
   }
 
   return (
-    <aside style={{ width }} className="h-full pl-2 select-none relative">
-      <div className="h-full grid grid-rows-[auto_1fr_auto]">
+    // sticky + viewport height so the composer is ALWAYS visible
+    <aside
+      style={{ width }}
+      className="sticky top-4 h-[calc(100vh-2rem)] pl-2 select-none relative"
+      role="region"
+      aria-label="Assistant"
+    >
+      {/* 3-row grid: header / messages (scroll) / composer (fixed) */}
+      <div className="h-full grid grid-rows-[auto,1fr,auto] min-h-0">
         {/* Header */}
         <Card className="p-3 rounded-xl border-slate-200">
           <div className="flex items-center justify-between">
@@ -129,7 +169,7 @@ export default function ChatDock({ initialWidth = 360, visible, onToggle }: Chat
           </div>
         </Card>
 
-        {/* Messages */}
+        {/* Messages (scrollable) */}
         <Card className="mt-2 overflow-hidden border-slate-200">
           <div
             ref={scrollRef}
@@ -140,10 +180,11 @@ export default function ChatDock({ initialWidth = 360, visible, onToggle }: Chat
           </div>
         </Card>
 
-        {/* Composer */}
+        {/* Composer (always visible) */}
         <div className="mt-2">
           <div className="flex gap-2">
             <Input
+              ref={inputRef}
               placeholder={sending ? "Thinking…" : "Ask about KPIs, claims, risk… (Enter to send)"}
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -154,7 +195,9 @@ export default function ChatDock({ initialWidth = 360, visible, onToggle }: Chat
               <SendHorizonal size={16} /> Send
             </Button>
           </div>
-          <div className="text-[11px] text-slate-500 mt-1">Shift+Enter for newline · Each turn is sent with your session</div>
+          <div className="text-[11px] text-slate-500 mt-1">
+             · Shift+Enter for newline · 
+          </div>
         </div>
       </div>
 
@@ -168,6 +211,9 @@ export default function ChatDock({ initialWidth = 360, visible, onToggle }: Chat
 function getSessionId(): string {
   const k = "ensurax_chat_session";
   let id = localStorage.getItem(k);
-  if (!id) { id = crypto.randomUUID(); localStorage.setItem(k, id); }
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem(k, id);
+  }
   return id;
 }
