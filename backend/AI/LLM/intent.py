@@ -15,6 +15,7 @@ def detect_intent(question: str) -> str:
                     "- 'smalltalk': If it's a greeting or friendly message directed at the assistant.\n"
                     "- 'help': If it's asking what the assistant can do, how to use it, or general assistance.\n"
                     "- 'data': If it's asking for insurance-related info (claims, policies, customers, metrics).\n"
+                    "- 'forecast': If the user is asking for a prediction, trend, or future estimate (e.g., 'predict', 'forecast', 'trend', 'estimate', 'project').\n"
                     "- 'offtopic': If it’s asking about unrelated things like weather, jokes, general trivia, etc.\n"
                     "- 'unknown': If unclear."
                 )
@@ -30,6 +31,8 @@ def detect_intent(question: str) -> str:
         return "smalltalk"
     if "help" in txt:
         return "help"
+    if "forecast" in txt:
+        return "forecast"
     if "data" in txt:
         return "data"
     if "offtopic" in txt:

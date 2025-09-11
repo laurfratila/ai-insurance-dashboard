@@ -60,6 +60,7 @@ def answer_question(
     if intent == "offtopic":
         return {
             "answer": {
+                "type": "text",
                 "rows": [],
                 "count": 0,
                 "summary": "I'm here to help you with insurance-related questions. Try asking me about claims, customers, or KPIs."
@@ -83,6 +84,7 @@ def answer_question(
         )
         return {
             "answer": {
+                "type": "text",
                 "rows": [],
                 "count": 0,
                 "summary": summary_text
@@ -94,7 +96,7 @@ def answer_question(
                 "question_hash": _hash_for_logging(question),
             }
         }
-    
+
     if intent == "help":
         summary_text = (
             "Of course! I'm here to assist you with insights from your insurance data.\n\n"
@@ -109,6 +111,7 @@ def answer_question(
         )
         return {
             "answer": {
+                "type": "text",
                 "rows": [],
                 "count": 0,
                 "summary": summary_text
@@ -118,6 +121,53 @@ def answer_question(
                 "intent": "help",
                 "user_id": user_id,
                 "question_hash": _hash_for_logging(question),
+            }
+        }
+
+    if intent == "forecast":
+        # Run the normal pipeline, but mark the response as a forecast for the frontend
+        plan_dict, llm_meta = build_plan_from_nl(question)
+        plan = Plan(**plan_dict)
+        sql, params = compile_sql(plan)
+        t_exec0 = time.time()
+        rows = run_query(db, sql, params, allow_pii=allow_pii)
+        summary_result = summarize_rows(question, rows)
+        exec_ms = round((time.time() - t_exec0) * 1000)
+        citations = make_citations(sql, params)
+        total_ms = round((time.time() - t0) * 1000)
+        meta = {
+            "compile_sql": sql,
+            "exec_latency_ms": exec_ms,
+            "plan_latency_ms": llm_meta.get("llm_latency_ms"),
+            "llm_latency_ms": llm_meta.get("llm_latency_ms"),
+            "token_usage": llm_meta.get("token_usage"),
+            "question_hash": _hash_for_logging(question),
+            "contains_pii": plan.contains_pii,
+            "user_id": user_id,
+            "total_latency_ms": total_ms,
+            "model": llm_meta.get("model")
+        }
+        summary_text = summary_result.get("summary", "[no summary]")
+        rag_logger.info(
+            f"RAG 📈 Forecast | user_id={user_id} | question={(question[:80] + '...' if len(question) > 80 else question)} | "
+            f"rows={len(rows)} | summary={summary_text} | "
+            f"model={meta.get('model')} | latency={meta.get('total_latency_ms')}ms | "
+            f"tokens={llm_meta.get('token_usage', {}).get('total')} | "
+            f"citations={[c['title'] for c in citations]}"
+        )
+        return {
+            "answer": {
+                "type": "forecast",
+                "rows": rows,
+                "count": len(rows),
+                "summary": summary_result.get("summary"),
+                "question": question
+            },
+            "citations": citations,
+            "meta": meta | {
+                "summary_llm_latency_ms": summary_result.get("llm_latency_ms"),
+                "summary_token_usage": summary_result.get("token_usage"),
+                "intent": "forecast"
             }
         }
 

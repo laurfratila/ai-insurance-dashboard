@@ -4,20 +4,18 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { createChatAdapter } from "./chatService";
 import type { ChatMessage } from "./types";
-import ChatMessageBubble from "./ChatMessage";
+import { renderChatMessage } from "./renderChatMessage";
 import { Bot, SendHorizonal, Trash2, PanelRightOpen, PanelRightClose } from "lucide-react";
 
 const adapter = createChatAdapter();
 
-export default function ChatDock({
-  initialWidth = 360,                 // <— a bit less than 420
-  visible,
-  onToggle,
-}: {
+type ChatDockProps = {
   initialWidth?: number;
   visible: boolean;
   onToggle: () => void;
-}) {
+};
+
+export default function ChatDock({ initialWidth = 360, visible, onToggle }: ChatDockProps) {
   const [width, setWidth] = useState(initialWidth);
   const [drag, setDrag] = useState<null | { startX: number; startW: number }>(null);
 
@@ -61,7 +59,22 @@ export default function ChatDock({
     setSending(true);
     try {
       const reply = await adapter.ask({ messages: [...messages, userMsg], sessionId: getSessionId() });
-      const botMsg: ChatMessage = { id: crypto.randomUUID(), role: "assistant", content: reply, createdAt: new Date().toISOString() };
+      let botMsg: ChatMessage;
+      if (reply && typeof reply === "object" && reply.type === "forecast") {
+        botMsg = {
+          id: crypto.randomUUID(),
+          role: "assistant",
+          content: JSON.stringify(reply), // always store as string
+          createdAt: new Date().toISOString(),
+        };
+      } else {
+        botMsg = {
+          id: crypto.randomUUID(),
+          role: "assistant",
+          content: typeof reply === "string" ? reply : (reply?.summary || "[No answer]"),
+          createdAt: new Date().toISOString()
+        };
+      }
       setMessages((m) => [...m, botMsg]);
     } catch (err: any) {
       const botMsg: ChatMessage = { id: crypto.randomUUID(), role: "assistant", content: `⚠️ ${err?.message ?? "Chat error"}`, createdAt: new Date().toISOString() };
@@ -118,10 +131,12 @@ export default function ChatDock({
 
         {/* Messages */}
         <Card className="mt-2 overflow-hidden border-slate-200">
-          <div ref={scrollRef} className="h-full overflow-y-auto p-3 space-y-3 bg-white">
-            {messages.map((m) => (
-              <ChatMessageBubble key={m.id} m={m} />
-            ))}
+          <div
+            ref={scrollRef}
+            className="h-full overflow-y-auto p-3 space-y-3 bg-white"
+            style={{ maxHeight: "calc(100vh - 180px)" }}
+          >
+            {messages.map((m) => renderChatMessage(m))}
           </div>
         </Card>
 
@@ -148,6 +163,7 @@ export default function ChatDock({
     </aside>
   );
 }
+
 
 function getSessionId(): string {
   const k = "ensurax_chat_session";
