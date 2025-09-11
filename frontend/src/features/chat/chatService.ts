@@ -5,7 +5,7 @@ import { api } from "@/lib/api";
 import type { ChatMessage, ChatRequest } from "./types";
 
 export interface ChatAdapter {
-  ask(req: ChatRequest): Promise<string>;
+  ask(req: ChatRequest): Promise<any>;
 }
 
 /** Last user message text (no findLast needed) */
@@ -33,43 +33,31 @@ type RagAskResponse = {
 };
 
 export class RestAdapter implements ChatAdapter {
-  async ask(req: ChatRequest): Promise<string> {
+  async ask(req: ChatRequest): Promise<any> {
     const question = lastUserText(req.messages);
     if (!question) throw new Error("Please type a question.");
 
     try {
-      // Correct path under /api
       const res = await api.post<RagAskResponse>("/api/rag/ask", { question });
       const data = res.data ?? {};
-
-      // ✅ Show ONLY the natural-language summary
-      const ans = data.answer as any;
-
-      if (ans && typeof ans === "object" && typeof ans.summary === "string") {
-        return ans.summary; // exact summary from backend
-      }
-
-      // sensible fallbacks if summary isn't present
-      if (typeof data.answer === "string") return data.answer;
-      if (ans && typeof ans.text === "string") return ans.text;
-
-      return "No summary was returned for this question.";
+      // Return the full answer object for downstream handling
+      return data.answer;
     } catch (err: any) {
       const detail =
         err?.response?.data?.detail ??
         err?.message ??
-        "Chat API error";
-      throw new Error(typeof detail === "string" ? detail : JSON.stringify(detail));
+        "Unknown error";
+      throw new Error(detail);
     }
   }
 }
 
 /** Mock adapter (optional offline dev) */
 export class MockAdapter implements ChatAdapter {
-  async ask(req: ChatRequest): Promise<string> {
+  async ask(req: ChatRequest): Promise<any> {
     const q = lastUserText(req.messages);
     await new Promise((r) => setTimeout(r, 300));
-    return `Mock summary for: ${q}`;
+    return { type: "text", summary: `Mock summary for: ${q}` };
   }
 }
 

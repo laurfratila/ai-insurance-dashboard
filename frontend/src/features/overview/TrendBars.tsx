@@ -12,7 +12,7 @@ export default function TrendBars({
   const fmtM = (d:string)=> {
     const dt = new Date(d); return dt.toLocaleString("en-US",{month:"short"});
   };
-  const tickFmt = (v:number)=> isPercent ? new Intl.NumberFormat("en-US",{style:"percent",maximumFractionDigits:0}).format(v) : v;
+  const tickFmt = (v:number)=> isPercent ? new Intl.NumberFormat("en-US",{style:"percent",maximumFractionDigits:0}).format(v) : v.toString();
 
   const mapped = data.map(p=>({ ...p, M: fmtM(p.date) }));
 
